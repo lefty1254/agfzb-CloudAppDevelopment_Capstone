@@ -20,7 +20,7 @@
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
                 <div class="navbar-header">
-                      <a class="navbar-brand" href="#">Best Cars Dealership</a>
+                      <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Best Cars Dealership</a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -32,6 +32,21 @@
     
             
         </nav>
+
+        <div class="col-md-6 mt-3 contact-widget-section2 wow animated fadeInLeft" data-wow-delay=".2s">
+            
+            <div class="find-widget">
+             Company:  <a href="{% url 'djangoapp:index' %}">Best Cars Dealership</a>
+            </div>
+            <div class="find-widget">
+             Address: <a href="#">Some unknown address</a>
+            </div>
+            <div class="find-widget">
+              Phone:  <a href="#">+1 999-999-9999</a>
+            </div>
+            
+            
+          </div>
         
     </body>
 </html>
