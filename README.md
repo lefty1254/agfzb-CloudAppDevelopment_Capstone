@@ -12,13 +12,13 @@ You must complete all the labs to successfully complete the project.
 2. Create an instance of the Natural Language Understanding (NLU) service.
 
 **Fork the project Github repository with a project then build and deploy the template project**
-1. Fork the repository in your account
+1. Fork the repository in your account [x]
 2. Clone the repository in the theia lab environment
 3. Create static pages to finish the user stories
 4. Deploy the application on IBM Cloud
 
 **Add user management to the application**
-1. Implement user management using the Django user authentication system.
+1. Implement user management using the Django user authentication system.[x]
 2. Set up continuous integration and delivery
 
 **Implement backend services**
