@@ -23,7 +23,7 @@ def get_request(url, api_key=None, **kwargs):
             params["features"] = kwargs["features"]
             params["return_analyzed_text"] = kwargs["return_analyzed_text"]
             params['language']='en'
-            response = requests.get(url, params=kwargs, headers={'Content-Type': 'application/json'}, auth=HTTPBasicAuth('apikey', api_key))
+            response = requests.get(url, params=params, headers={'Content-Type': 'application/json'}, auth=HTTPBasicAuth('apikey', api_key))
             return json.loads(response.text)
         except:
             print('Network exception occured')
