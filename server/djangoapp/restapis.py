@@ -43,13 +43,6 @@ def get_request(url, api_key=None, **kwargs):
         json_data = json.loads(response.text)
         return json_data
 
-def analyze_review_sentiments(dealerreview):
-    load_dotenv()
-    apikey = os.getenv('watson_api_key')
-    url = os.getenv('watson_url')
-    json_res=get_request(url,  api_key=apikey, text=dealerreview, version="2022-04-07", features='sentiment', return_analyzed_text=True)
-    print("Json sentiment",json_res)
-    return json_res['sentiment']['document']['label'].capitalize()
 
 def get_dealer_by_id(url, dealer_id, **kwargs):
     results = []
@@ -91,6 +84,16 @@ def get_dealer_by_state(url, state, **kwargs):
 
 # Create a `post_request` to make HTTP POST requests
 # e.g., response = requests.post(url, params=kwargs, json=payload)
+def post_request(url, json_payload, **kwargs):
+    if requests.user.is_authenticated:
+        try:
+            response = requests.post(url, params=kwargs, json=json_payload)
+        except:
+            print('Network error occured')
+        status_code = response.status_code
+        print("With status {} ".format(status_code))
+        json_data = json.loads(response.text)
+        return json_data
 
 
 # Create a get_dealers_from_cf method to get dealers from a cloud function
@@ -161,5 +164,12 @@ def get_dealer_reviews_from_cf(url, dealer_id, **kwargs):
 # - Call get_request() with specified arguments
 # - Get the returned sentiment label such as Positive or Negative
 
+def analyze_review_sentiments(dealerreview):
+    load_dotenv()
+    apikey = os.getenv('watson_api_key')
+    url = os.getenv('watson_url')
+    json_res=get_request(url,  api_key=apikey, text=dealerreview, version="2022-04-07", features='sentiment', return_analyzed_text=True)
+    print("Json sentiment",json_res)
+    return json_res['sentiment']['document']['label'].capitalize()
 
 
