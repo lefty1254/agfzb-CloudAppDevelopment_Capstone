@@ -12,41 +12,85 @@
 </head>
     <body>
     <!--Add review form here -->
-    <form action="{% url 'djangoapp:add_review' %}" method="post">
+    <form class='form' action="{% url 'djangoapp:add_review' dealerId%}" method="post">
         <div class="container"> 
             {% csrf_token %}
             <h1>Add review</h1>
             <hr>
             <div class="form-group row">
-                <label for="id"><b>Id</b></label>
-                <input type="number" class="form-control" placeholder="Enter Id: " name="id" required> 
-                <label for="name"><b>Name</b></label>
-                <input type="text" class="form-control" placeholder="Enter Name: " name="name" required>
-                <label for="review"><b>Review</b></label>
-                <text-area class="form-control" placeholder="Add review" name="review" required> 
-                <label for="purchace"><b>Password</b></label>
+                <label class="col-sm-2 col-form-label" for="id"><b>Id</b></label>
+                <div class='col-sm-10'>
+                    <input type="number" min='1' max='10000' class="form-control" placeholder="Enter Id: " name="id" required> 
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="name"><b>Name</b></label>
+                <div class='col-sm-10'>
+                    <input type="text" class="form-control" placeholder="Enter Name: " name="name" required>                        
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="review"><b>Review</b></label>
+                <div class='col-sm-10'>
+                    <textarea class="form-control" placeholder="Add review" rows="3" name="review" >
+
+                    </textarea>                        
+                </div>
+            </div>
+
+            
+
+                <!-- <label class="col-sm-2 col-form-label" for="purchace"><b>Password</b></label>
                 <input type="radio" class="form-control" placeholder="Enter Password: " name="psw" required> 
                 {% if message %}
-                <div class="alert alert-warning"> 
-                    {{ message }}
+            <div class="alert alert-warning"> 
+                {{ message }}
+            </div>
+            {% endif %} -->
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="purchace_date"><b>Purchace Date</b><label>                
+                <div class='col-sm-10'>
+                    <input type="date" class='form-control' name='purchace_date'>        
                 </div>
-                {% endif %}
-                <label for="purchace_date"><b>Purchace Date</b><label>
-                <input type="date" class='form-control' name='purchace_date'>
+            </div>
 
-                <label for="car_make"><b>Car Make</b><label>
-                <input type="text" class='form-control' name='car_make'>
-
-                <label for="car_model"><b>Car Model</b><label>
-                <input type="text" class='form-control' name='car_model'>
-
-                <label for="car_year"><b>Car Year</b><label>
-                <input type="number" min='1900' max='2030' value='2020' class='form-control' name='car_year'>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="car_make"><b>Car Make</b><label>
+                <div class='col-sm-10'>
+                    <input type="text" class='form-control' name='car_make' placeholder=''>    
+                </div>
+            </div>
 
                 
 
-                <button class="btn btn-primary" type="submit">Submit Review</button>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="car_model"><b>Car Model</b><label>
+                <div class='col-sm-10'>
+                    <input type="text" class='form-control' name='car_model'>    
+                </div>
             </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="car_year"><b>Car Year</b><label>
+                <div class='col-sm-10'>
+                    <input type="number" min='1900' max='2030' value='2020' class='form-control' name='car_year'>                        
+                </div>
+            </div>
+
+                
+                
+            <div class="form-group row">
+
+                <div class='col-sm-10'>
+                    <button class="btn btn-primary" type="submit">Submit Review</button>
+                        
+                </div>
+            </div>
+                
+
         </div>
     </form>
     </body>
