@@ -84,16 +84,16 @@ def get_dealer_by_state(url, state, **kwargs):
 
 # Create a `post_request` to make HTTP POST requests
 # e.g., response = requests.post(url, params=kwargs, json=payload)
-def post_request(url, json_payload, **kwargs):
-    if requests.user.is_authenticated:
-        try:
-            response = requests.post(url, params=kwargs, json=json_payload)
-        except:
-            print('Network error occured')
-        status_code = response.status_code
-        print("With status {} ".format(status_code))
-        json_data = json.loads(response.text)
-        return json_data
+def post_request(url, json_payload,  request, **kwargs):
+    # if request.user.is_authenticated:
+    try:
+        response = requests.post(url, params=kwargs, json=json_payload)
+    except:
+        print('Network error occured')
+    status_code = response.status_code
+    print("With status {} ".format(status_code))
+    json_data = json.loads(response.text)
+    return json_data
 
 
 # Create a get_dealers_from_cf method to get dealers from a cloud function
