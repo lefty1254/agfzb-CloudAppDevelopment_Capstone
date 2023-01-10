@@ -29,18 +29,21 @@ def get_request(url, api_key=None, **kwargs):
             print('Network exception occured')
 
     else:
+        json_data={}
         # print(kwargs)
         print("GET from {} ".format(url))
         try:
             # Call get method of requests library with URL and parameters
             response = requests.get(url, headers={'Content-Type': 'application/json'},
                                         params=kwargs)
+            status_code = response.status_code
+            json_data = json.loads(response.text)
+            print("With status {} ".format(status_code))
         except:
             # If any error occurs
             print("Network exception occurred")
-        status_code = response.status_code
-        print("With status {} ".format(status_code))
-        json_data = json.loads(response.text)
+        
+        
         return json_data
 
 
@@ -133,7 +136,7 @@ def get_dealer_reviews_from_cf(url, dealer_id, **kwargs):
         # print(reviews)
 
         for review in reviews:
-            # print(review)
+            print(review)
             rev_obj = DealerReview(dealership=review['dealership'],
                 name=review['name'],
                 purchase=review['purchase'],
@@ -153,6 +156,7 @@ def get_dealer_reviews_from_cf(url, dealer_id, **kwargs):
             results.append(rev_obj)
             
             # print(rev_obj)
+        print(results)
     return results
 
 
@@ -166,10 +170,14 @@ def get_dealer_reviews_from_cf(url, dealer_id, **kwargs):
 
 def analyze_review_sentiments(dealerreview):
     load_dotenv()
+    print("review",dealerreview)
     apikey = os.getenv('watson_api_key')
+    print(apikey)
     url = os.getenv('watson_url')
     json_res=get_request(url,  api_key=apikey, text=dealerreview, version="2022-04-07", features='sentiment', return_analyzed_text=True)
     print("Json sentiment",json_res)
-    return json_res['sentiment']['document']['label'].capitalize()
+    if bool(json_res):
+        return json_res['sentiment']['document']['label']
+    return ''
 
 

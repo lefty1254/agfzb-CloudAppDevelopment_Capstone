@@ -100,6 +100,7 @@ def get_dealer_details(request, dealer_id):
     reviews = get_dealer_reviews_from_cf(url, dealer_id)
     if reviews:
         context = {'reviews' : reviews}
+        print(reviews)
     return render(request, 'djangoapp/dealer_details.html', context)
 
 # ...
@@ -119,11 +120,11 @@ def add_review(request, dealer_id):
         review['name'] = request.POST['name']
         review['review'] = request.POST['review']
         if request.POST['purchace']=='1':
-            review['purchace'] = True
+            review['purchase'] = True
         else:
-            review['purchace'] = False
+            review['purchase'] = False
         if len(request.POST['purchace_date'])>0:
-            review['purchace_date'] = request.POST['purchace_date']
+            review['purchase_date'] = request.POST['purchace_date']
         if len(request.POST['car_make'])>0:
             review['car_make'] = request.POST['car_make']
         if len(request.POST['car_model'])>0:
