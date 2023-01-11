@@ -5,6 +5,11 @@
     <title>Dealership Review</title>
     {% load static %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .card-img-left{
+            height: 5vh;
+        }
+    </style>
 </head>
 
     <body>
@@ -45,15 +50,22 @@
 
         
     </nav>
+    <h3 class='p-5'>
+        Reviews for {{dealer.full_name}}
+    </h3>
+    
 
     <!-- Add reviews as cards -->
     <div class='container'>
+        
     
         <div class="card-columns">
             {% for review in reviews %}
             <div class='card'>
-                <img class="card-img-left" src="{{MEDIA_URL}}/emoji/{{review.sentiment}}.png" alt="{{review.sentiment}}">
-                <div class="card-body">
+                <div class='card-body'>
+                    <img class="card-img-left" src="{{MEDIA_URL}}/emoji/{{review.sentiment}}.png" alt="{{review.sentiment}}">
+                </div>
+                <div class="card-header">
                     <div class="card-title"><h3>{{review.car_make}}, {{review.car_model}}</h3></div>
                     <div class="card-title"><h3>{{review.car_year}}</h3></div>
                     <div class="card-text">

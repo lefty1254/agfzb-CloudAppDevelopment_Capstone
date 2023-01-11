@@ -5,6 +5,7 @@ import json
 from .models import CarDealer, DealerReview
 from requests.auth import HTTPBasicAuth
 from datetime import date
+from django.conf import settings
 
 
 
@@ -58,13 +59,15 @@ def get_dealer_by_id(url, dealer_id, **kwargs):
         # For each dealer object
         for dealer_doc in json_result:
             # Create a CarDealer object with values in `doc` object
-            dealer_obj = CarDealer(address=dealer_doc["address"], city=dealer_doc["city"], full_name=dealer_doc["full_name"],
+            if dealer_id==int(dealer_doc['id']):
+                return CarDealer(address=dealer_doc["address"], city=dealer_doc["city"], full_name=dealer_doc["full_name"],
                                    id=dealer_doc["id"], lat=dealer_doc["lat"], long=dealer_doc["long"],
                                    short_name=dealer_doc["short_name"],
                                    st=dealer_doc["st"], zip=dealer_doc["zip"])
-            results.append(dealer_obj)
+                
+            
 
-    return results
+    return None
 
 def get_dealer_by_state(url, state, **kwargs):
     results = []
@@ -171,9 +174,9 @@ def get_dealer_reviews_from_cf(url, dealer_id, **kwargs):
 def analyze_review_sentiments(dealerreview):
     load_dotenv()
     print("review",dealerreview)
-    apikey = os.getenv('watson_api_key')
+    apikey = "mAkpKmVOaf-MkBL-sqeak0RhypN_E0SQKpEmDXpl-3S6"
     print(apikey)
-    url = os.getenv('watson_url')
+    url = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/1f0a6560-4341-4838-a6ef-e91a62a3fb8e/v1/analyze"
     json_res=get_request(url,  api_key=apikey, text=dealerreview, version="2022-04-07", features='sentiment', return_analyzed_text=True)
     print("Json sentiment",json_res)
     if bool(json_res):
